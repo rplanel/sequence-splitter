@@ -1,0 +1,6 @@
+data/
+.vscode/
+log
+out/
+__pycache__
+*.pyc
