@@ -5,7 +5,7 @@
     <command detect_errors="exit_code"><![CDATA[
         ln -s '$sequences' ./sequences.$sequences.ext &&
         python 
-            '$__tool_directory__/split_sequences.py' 
+            '$__tool_directory__/sequence-splitter.py' 
             -s ./sequences.$sequences.ext
             #if $sequences.is_of_type("fasta"): 
                 -f fasta
