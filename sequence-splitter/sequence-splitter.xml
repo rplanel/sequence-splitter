@@ -46,6 +46,9 @@
         </test>
     </tests>
     <help><![CDATA[
-        TODO: Fill in help.
+
+Usage: split_sequences.py [-h] [-s SEQUENCES] [-f FORMAT] (-cs CHUNK_SIZE | -nc NB_CHUNK) [-o OUTPUT]
+
+
     ]]>    </help>
 </tool>
