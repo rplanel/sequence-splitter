@@ -1,0 +1,51 @@
+<tool id="sequence-splitter" name="Sequence Splitter" version="0.1.0">
+    <requirements>
+        <requirement type="package" version="1.73">biopython</requirement>
+    </requirements>
+    <command detect_errors="exit_code"><![CDATA[
+        ln -s '$sequences' '$sequences.name' &&
+        python 
+            '$__tool_directory__/split_sequences.py' 
+            -s '$sequences.name'
+            #if $sequences.is_of_type("fasta"): 
+                -f fasta
+            #else:
+                -f fastq
+            #end if
+            -cs '$chunk_size' 
+            -o 'outputs'
+    ]]>    </command>
+    <inputs>
+        <param type="data" name="sequences" format="fasta,fastq" />
+        <param type="integer" name="chunk_size" value="2"/>
+    </inputs>
+    <outputs>
+        <collection name="split_output" type="list" label="splitted sequences">
+            <discover_datasets pattern="__designation_and_ext__" directory="outputs" />
+        </collection>
+    </outputs>
+    <tests>
+        <test>
+            <param name="sequences" value="sample.fasta"/>
+            <param name="chunk_size" value="2"/>
+            <output_collection name="split_output" type="list" count="2">
+                <element name="sample-chunk-1" file="sample-chunk-1.fasta" ftype="fasta"/>
+                <element name="sample-chunk-2" file="sample-chunk-2.fasta" ftype="fasta"/>
+            </output_collection>
+        </test>
+        <test>
+            <param name="sequences" value="sample.fastq"/>
+            <param name="chunk_size" value="2"/>
+            <output_collection name="split_output" type="list" count="5">
+                <element name="sample-chunk-1" file="sample-chunk-1.fastq" ftype="fastq"/>
+                <element name="sample-chunk-2" file="sample-chunk-2.fastq" ftype="fastq"/>
+                <element name="sample-chunk-3" file="sample-chunk-3.fastq" ftype="fastq"/>
+                <element name="sample-chunk-4" file="sample-chunk-4.fastq" ftype="fastq"/>
+                <element name="sample-chunk-5" file="sample-chunk-5.fastq" ftype="fastq"/>
+            </output_collection>
+        </test>
+    </tests>
+    <help><![CDATA[
+        TODO: Fill in help.
+    ]]>    </help>
+</tool>
