@@ -14,5 +14,5 @@ before_install:
  - pip install planemo
 
 script:
- - planemo lint ${TRAVIS_BUILD_DIR}/galaxy/sequence-tools/
+ - planemo lint --skip 'citations' ${TRAVIS_BUILD_DIR}/galaxy/sequence-tools/
  - planemo test --install_galaxy --no_cache_galaxy ${TRAVIS_BUILD_DIR}/galaxy/sequence-tools/

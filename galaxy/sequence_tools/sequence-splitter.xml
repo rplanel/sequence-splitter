@@ -7,17 +7,32 @@
         python 
             '$__tool_directory__/sequence-splitter.py' 
             -s ./sequences.$sequences.ext
-            #if $sequences.is_of_type("fasta"): 
+            #if $sequences.is_of_type("fasta") 
                 -f fasta
-            #else:
+            #else
                 -f fastq
+            #end if 
+            #if $split_mode.selector == 'chunk_size'
+                -cs $split_mode.chunk_size
+            #else
+                -nc $split_mode.nb_chunk
             #end if
-            -cs '$chunk_size' 
             -o 'outputs'
     ]]>    </command>
     <inputs>
-        <param type="data" name="sequences" format="fasta,fastq" />
-        <param type="integer" name="chunk_size" value="2"/>
+        <param type="data" name="sequences" format="fasta,fastq"/>
+        <conditional name="split_mode">
+            <param name="selector" type="select" label="Split by chunk size or number of chunk">
+                <option value="chunk_size">Chunk size</option>
+                <option value="nb_chunk">Number of chunks</option>
+            </param>
+            <when value="chunk_size">
+                <param name="chunk_size" type="integer" value="100"/>
+            </when>
+            <when value="nb_chunk">
+                <param name="nb_chunk" type="integer" value="10" />
+            </when>
+        </conditional>
     </inputs>
     <outputs>
         <collection name="split_output" type="list" label="splitted sequences">
