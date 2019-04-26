@@ -1,11 +1,11 @@
 stages:
   - test
 
-test-ubuntu:
-  image: ubuntu
+test-centos:
+  image: centos:centos7
   stage: test
   script:
-  - apt-get install -y python-virtualenv
+  - yum install -y python-virtualenv
   - virtualenv planemo-venv
   - . planemo-venv/bin/activate
   - pip install planemo
