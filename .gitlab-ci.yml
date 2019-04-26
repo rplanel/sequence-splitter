@@ -1,11 +1,13 @@
+image: docker:latest
+
 stages:
   - test
 
-test-centos:
-  image: centos:centos7
+test:
   stage: test
+  image: python:2.7
   script:
-  - yum install -y python-virtualenv
+  - apt install -y python-virtualenv
   - virtualenv planemo-venv
   - . planemo-venv/bin/activate
   - pip install planemo
