@@ -40,8 +40,7 @@ def gen_get_chunks(sequences_path, sequences_format, nb_chunk):
     sequences_to_split = gen_sequence_record(sequences_path, sequences_format)
 
     # Get the size of the chunks
-    chunk_size = int(nb_sequences / nb_chunk)
-
+    chunk_size = int(nb_sequences / nb_chunk) if nb_sequences > nb_chunk else 1 
     return gen_get_chunks_by_size(sequences_to_split, chunk_size)
 
 

@@ -42,7 +42,10 @@
     <tests>
         <test>
             <param name="sequences" value="sample.fasta"/>
-            <param name="chunk_size" value="2"/>
+            <conditional name="split_mode">
+                <param name="selector" value="chunk_size"/>
+                <param name="chunk_size" value="2"/>
+            </conditional>
             <output_collection name="split_output" type="list" count="2">
                 <element name="sequences-chunk-1" file="sample-chunk-1.fasta" ftype="fasta"/>
                 <element name="sequences-chunk-2" file="sample-chunk-2.fasta" ftype="fasta"/>
@@ -50,7 +53,10 @@
         </test>
         <test>
             <param name="sequences" value="sample.fastq"/>
-            <param name="chunk_size" value="2"/>
+            <conditional name="split_mode">
+                <param name="selector" value="chunk_size"/>
+                <param name="chunk_size" value="2"/>
+            </conditional>
             <output_collection name="split_output" type="list" count="5">
                 <element name="sequences-chunk-1" file="sample-chunk-1.fastq" ftype="fastqsanger"/>
                 <element name="sequences-chunk-2" file="sample-chunk-2.fastq" ftype="fastqsanger"/>
@@ -59,6 +65,32 @@
                 <element name="sequences-chunk-5" file="sample-chunk-5.fastq" ftype="fastqsanger"/>
             </output_collection>
         </test>
+
+        <test>
+            <param name="sequences" value="sample.fastq"/>
+            <conditional name="split_mode">
+                <param name="selector" value="nb_chunk" />
+                <param name="nb_chunk" value="2"/>
+            </conditional>
+            <output_collection name="split_output" type="list" count="2">
+                <element name="sequences-chunk-1" file="sample-3-chunk-1.fastq" ftype="fastqsanger"/>
+                <element name="sequences-chunk-2" file="sample-3-chunk-2.fastq" ftype="fastqsanger"/>
+            </output_collection>
+        </test>
+        <test>
+            <param name="sequences" value="sample.fasta"/>
+            <conditional name="split_mode">
+                <param name="selector" value="nb_chunk" />
+                <param name="nb_chunk" value="10"/>
+            </conditional>
+            <output_collection name="split_output" type="list" count="4">
+                <element name="sequences-chunk-1" file="sample-2-chunk-1.fasta" ftype="fasta"/>
+                <element name="sequences-chunk-2" file="sample-2-chunk-2.fasta" ftype="fasta"/>
+                <element name="sequences-chunk-3" file="sample-2-chunk-3.fasta" ftype="fasta"/>
+                <element name="sequences-chunk-4" file="sample-2-chunk-4.fasta" ftype="fasta"/>
+            </output_collection>
+        </test>
+
     </tests>
     <help><![CDATA[
 
