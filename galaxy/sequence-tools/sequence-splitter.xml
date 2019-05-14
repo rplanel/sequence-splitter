@@ -12,7 +12,7 @@
         <edam_topic>topic_0080</edam_topic>
     </edam_topics>
     <command detect_errors="exit_code"><![CDATA[
-        ln -s '$sequences' ./sequences.$sequences.ext &&
+        ln -s '$sequences' ./sequences.${sequences.ext} &&
         python 
             '$__tool_directory__/sequence-splitter.py' 
             -s ./sequences.$sequences.ext
@@ -45,8 +45,9 @@
     </inputs>
     <outputs>
         <collection name="split_output" type="list" label="splitted sequences">
-            <discover_datasets pattern="__designation_and_ext__" directory="outputs" />
+            <discover_datasets pattern="(?P&lt;designation&gt;\w+-chunk-\d+)\.(?P&lt;ext&gt;.+)" directory="outputs" />
         </collection>
+        <data format="text" name="logfile" from_work_dir="sequence-splitter.log" label="${tool.name} logfile on ${on_string}"/>
     </outputs>
     <tests>
         <test>
