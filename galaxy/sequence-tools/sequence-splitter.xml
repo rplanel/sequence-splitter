@@ -1,7 +1,16 @@
 <tool id="sequence-splitter" name="Sequence Splitter" version="0.1.0">
     <requirements>
-        <requirement type="package" version="1.73">biopython</requirement>
+
+        <requirement type="package" version="2.7.11">Python</requirement>
     </requirements>
+    <edam_operations>
+        <edam_operation>operation_2409</edam_operation>
+        <edam_operation>operation_3359</edam_operation>
+    </edam_operations>
+    <edam_topics>
+        <edam_topic>topic_3307</edam_topic>
+        <edam_topic>topic_0080</edam_topic>
+    </edam_topics>
     <command detect_errors="exit_code"><![CDATA[
         ln -s '$sequences' ./sequences.$sequences.ext &&
         python 
@@ -27,10 +36,10 @@
                 <option value="nb_chunk">Number of chunks</option>
             </param>
             <when value="chunk_size">
-                <param name="chunk_size" type="integer" value="100"/>
+                <param name="chunk_size" label="Chunk size" type="integer" min="1" value="100" help="How many sequences by chunk ?"/>
             </when>
             <when value="nb_chunk">
-                <param name="nb_chunk" type="integer" value="10" />
+                <param name="nb_chunk" label="Number of chunks" type="integer" min="1" value="10" help="How many chunks ?"/>
             </when>
         </conditional>
     </inputs>
