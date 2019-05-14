@@ -10,6 +10,7 @@ test:
   - virtualenv planemo-venv
   - . planemo-venv/bin/activate
   - pip install planemo
+  - pip install -r requirements.txt
   - planemo lint --skip 'citations' galaxy/sequence-tools/
   - planemo test --install_galaxy --no_cache_galaxy galaxy/sequence-tools/
 
